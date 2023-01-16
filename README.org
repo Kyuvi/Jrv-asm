@@ -4,7 +4,7 @@
 
 A Clojure library designed for writing RISC-V assembly in clojure
 
-The main repository is on [[https://codeberg.org/Kyuvi/][Codeberg]]. if you are viewing this anywhere else, it is just a mirror. Please use the [[https://codeberg.org/Kyuvi/][Codeberg]] repository for pull requests and issues. Thank you.
+The main repository is on [[https://codeberg.org/Kyuvi/jrv-asm][Codeberg]]. if you are viewing this anywhere else, it is just a mirror. Please use the [[https://codeberg.org/Kyuvi/jrv-asm][Codeberg]] repository for pull requests and issues. Thank you.
 
 * Description
 A crude but functional implementation of a dynamic [[https://en.wikipedia.org/wiki/Riscv][RISC-V]] assembler in [[https://en.wikipedia.org/wiki/Clojure][Clojure]], Still in a pre-alpha state, pretty much everything is liable to change.
@@ -32,7 +32,7 @@ also sv/lv (store vait/load vait) are of the form....
 - (sv rs rb imm) ;; sv source-reg base-reg immediate
 - (lv rd rb imm) ;; lv dest-reg base-reg immediate
 
-as are all the other loads and stores (sb,lb, sj/lj, sz/lz).
+as are all the other loads and stores (sb,lb, sk/lk, sz/lz).
 
 I personally find it easier to think like this about (modern) assembly code.
 
