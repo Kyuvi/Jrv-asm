@@ -1,0 +1,78 @@
+(ns jrv.zicsr-test
+  (:refer-clojure :rename {and cj-and, or cj-or, not cj-not, rem cj-rem})
+  (:require [clojure.test :refer :all]
+   [jrv.korr [cj-utils :refer :all]
+             [env :refer :all]
+             [reg :refer :all]
+             [fmt :refer :all]]
+   [jrv.ins.zicsr :refer :all]
+   [jrv.core-test :refer :all]
+)
+)
+
+
+(deftest z-csrrw
+  (is (jrv-v= (csrrw x0 0x0 x0    ) 2r00000000000000000001000001110011))
+  (is (jrv-v= (csrrw x0 0xFFF x0  ) 2r11111111111100000001000001110011))
+  (is (jrv-v= (csrrw x0 0x0 x31   ) 2r00000000000011111001000001110011))
+  (is (jrv-v= (csrrw x31 0x0 x0   ) 2r00000000000000000001111111110011))
+  (is (jrv-v= (csrrw x0 0xFFF x31 ) 2r11111111111111111001000001110011))
+  (is (jrv-v= (csrrw x31 0xFFF x0 ) 2r11111111111100000001111111110011))
+  (is (jrv-v= (csrrw x31 0x0 x31  ) 2r00000000000011111001111111110011))
+  (is (jrv-v= (csrrw x31 0xFFF x31) 2r11111111111111111001111111110011))
+)
+
+(deftest z-csrrs
+  (is (jrv-v= (csrrs x0 0x0 x0    ) 2r00000000000000000010000001110011))
+  (is (jrv-v= (csrrs x0 0xFFF x0  ) 2r11111111111100000010000001110011))
+  (is (jrv-v= (csrrs x0 0x0 x31   ) 2r00000000000011111010000001110011))
+  (is (jrv-v= (csrrs x31 0x0 x0   ) 2r00000000000000000010111111110011))
+  (is (jrv-v= (csrrs x0 0xFFF x31 ) 2r11111111111111111010000001110011))
+  (is (jrv-v= (csrrs x31 0xFFF x0 ) 2r11111111111100000010111111110011))
+  (is (jrv-v= (csrrs x31 0x0 x31  ) 2r00000000000011111010111111110011))
+  (is (jrv-v= (csrrs x31 0xFFF x31) 2r11111111111111111010111111110011))
+)
+
+(deftest z-csrrc
+  (is (jrv-v= (csrrc x0 0x0 x0    ) 2r00000000000000000011000001110011))
+  (is (jrv-v= (csrrc x0 0xFFF x0  ) 2r11111111111100000011000001110011))
+  (is (jrv-v= (csrrc x0 0x0 x31   ) 2r00000000000011111011000001110011))
+  (is (jrv-v= (csrrc x31 0x0 x0   ) 2r00000000000000000011111111110011))
+  (is (jrv-v= (csrrc x0 0xFFF x31 ) 2r11111111111111111011000001110011))
+  (is (jrv-v= (csrrc x31 0xFFF x0 ) 2r11111111111100000011111111110011))
+  (is (jrv-v= (csrrc x31 0x0 x31  ) 2r00000000000011111011111111110011))
+  (is (jrv-v= (csrrc x31 0xFFF x31) 2r11111111111111111011111111110011))
+)
+
+(deftest z-csrrwi
+  (is (jrv-v= (csrrwi x0 0x0 0    ) 2r00000000000000000101000001110011))
+  (is (jrv-v= (csrrwi x0 0xFFF 0  ) 2r11111111111100000101000001110011))
+  (is (jrv-v= (csrrwi x0 0x0 31   ) 2r00000000000011111101000001110011))
+  (is (jrv-v= (csrrwi x31 0x0 0   ) 2r00000000000000000101111111110011))
+  (is (jrv-v= (csrrwi x0 0xFFF 31 ) 2r11111111111111111101000001110011))
+  (is (jrv-v= (csrrwi x31 0xFFF 0 ) 2r11111111111100000101111111110011))
+  (is (jrv-v= (csrrwi x31 0x0 31  ) 2r00000000000011111101111111110011))
+  (is (jrv-v= (csrrwi x31 0xFFF 31) 2r11111111111111111101111111110011))
+)
+
+(deftest z-csrrsi
+  (is (jrv-v= (csrrsi x0 0x0 0    ) 2r00000000000000000110000001110011))
+  (is (jrv-v= (csrrsi x0 0xFFF 0  ) 2r11111111111100000110000001110011))
+  (is (jrv-v= (csrrsi x0 0x0 31   ) 2r00000000000011111110000001110011))
+  (is (jrv-v= (csrrsi x31 0x0 0   ) 2r00000000000000000110111111110011))
+  (is (jrv-v= (csrrsi x0 0xFFF 31 ) 2r11111111111111111110000001110011))
+  (is (jrv-v= (csrrsi x31 0xFFF 0 ) 2r11111111111100000110111111110011))
+  (is (jrv-v= (csrrsi x31 0x0 31  ) 2r00000000000011111110111111110011))
+  (is (jrv-v= (csrrsi x31 0xFFF 31) 2r11111111111111111110111111110011))
+  )
+
+(deftest z-csrrci
+  (is (jrv-v= (csrrci x0 0x0 0    ) 2r00000000000000000111000001110011))
+  (is (jrv-v= (csrrci x0 0xFFF 0  ) 2r11111111111100000111000001110011))
+  (is (jrv-v= (csrrci x0 0x0 31   ) 2r00000000000011111111000001110011))
+  (is (jrv-v= (csrrci x31 0x0 0   ) 2r00000000000000000111111111110011))
+  (is (jrv-v= (csrrci x0 0xFFF 31 ) 2r11111111111111111111000001110011))
+  (is (jrv-v= (csrrci x31 0xFFF 0 ) 2r11111111111100000111111111110011))
+  (is (jrv-v= (csrrci x31 0x0 31  ) 2r00000000000011111111111111110011))
+  (is (jrv-v= (csrrci x31 0xFFF 31) 2r11111111111111111111111111110011))
+  )

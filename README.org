@@ -1,0 +1,69 @@
+ #+TITLE: Clojure RISC-V assembler (jrv-asm)
+ # #+STARTUP: content
+
+
+A Clojure library designed for writing RISC-V assembly in clojure
+
+The main repository is on [[https://codeberg.org/Kyuvi/][Codeberg]]. if you are viewing this anywhere else, it is just a mirror. Please use the [[https://codeberg.org/Kyuvi/][Codeberg]] repository for pull requests and issues. Thank you.
+
+* Description
+A crude but functional implementation of a dynamic [[https://en.wikipedia.org/wiki/Riscv][RISC-V]] assembler in [[https://en.wikipedia.org/wiki/Clojure][Clojure]], Still in a pre-alpha state, pretty much everything is liable to change.
+
+It currently supports only the 32-bit I and M modules plus the base instructions from the C module and the ZiCSR module including the (proposed?) 32-bit CSR memory map, but has been designed to be extended to support other modules and both 64-bit and 128-bit instruction sets as well.
+
+These are actually the basic modules/packages to be used to build up an assembler for the instruction set of a processor when needed.
+
+# It is not optimized for using compressed instructions, and when using the "I-C-32-RV" module, unless compressed instructions are explicitly used, the compressed instructions are only used for resolved immediates (labels), i.e. compressed instructions will only be used for backward branches if possible.
+
+
+* Syntax and Notation
+** Assembly Related
+It includes some changes to the standard assembly notation and syntax namely....
+- nibble - 4-bit (nibble)
+- byte - 8-bit   (byte)
+- kait - 16-bit  (half word)
+- vait - 32-bit  (word)
+- zait - 64-bit  (double word)
+- yait - 128-bit (quad word) (very likely to change)
+
+Though I will probably use Double and Quad for the floating point module names as the module letters are derived from those.
+
+also sv/lv (store vait/load vait) are of the form....
+- (sv rs rb imm) ;; sv source-reg base-reg immediate
+- (lv rd rb imm) ;; lv dest-reg base-reg immediate
+
+as are all the other loads and stores (sb,lb, sj/lj, sz/lz).
+
+I personally find it easier to think like this about (modern) assembly code.
+
+** Clojure Related
+"and", "or", "rem", and "not" are prefixed with "cj-" within the instruction modules so the original words can comply with the RISC-V standard, and I feel this convention should be followed when using this library.
+
+
+* Usage
+
+FIXME
+
+* License
+
+Copyright © 2022 Kyuvi
+
+This program and the accompanying materials are made available under the
+terms of the GNU General Public License 3.0 or later which is available at
+https://www.gnu.org/licenses/gpl-3.0.html
+ with the GNU Classpath Exception which is available at https://www.gnu.org/software/classpath/license.html.
+
+# This Source Code may also be made available under the following Secondary
+# Licenses when the conditions for such availability set forth in the Eclipse
+# Public License, v. 2.0 are satisfied: GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or (at your
+# option) any later version, with the GNU Classpath Exception which is available
+# at https://www.gnu.org/software/classpath/license.html.
+
+* Acknowledgments
+This assembler is based on
+- Andy Hefner's [[https://github.com/ahefner/asm6502][asm-6502]], https://ahefner.livejournal.com/20528.html.
+- Technoblogy's [[https://github.com/technoblogy/lisp-riscv-assembler][RISC-V assembler]], http://www.ulisp.com/show?310Z.
+
+Also thanks to
+- Andrew Dailey's [[https://github.com/theandrew168/bronzebeard][Bronzebeard project]].
