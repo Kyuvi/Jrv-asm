@@ -36,8 +36,11 @@ as are all the other loads and stores (sb,lb, sk/lk, sz/lz).
 
 I personally find it easier to think like this about (modern) assembly code.
 
+Also register "zero" (x0) is renamed to "zr" to avoid confusion with clojures =zero?=
+function and its test is =zr?= or =z-reg?=.
+
 ** Clojure Related
-"and", "or", "rem", and "not" are prefixed with "cj-" within the instruction modules so the original words can comply with the RISC-V standard, and I feel this convention should be followed when using this library.
+"and", "or", "rem", "not", "dec" and "inc" are prefixed with "cj-" within the instruction modules so the original words can comply with the RISC-V standard, and I feel this convention should be followed when using this library.
 
 
 * Usage
@@ -53,12 +56,6 @@ terms of the GNU General Public License 3.0 or later which is available at
 https://www.gnu.org/licenses/gpl-3.0.html
  with the GNU Classpath Exception which is available at https://www.gnu.org/software/classpath/license.html.
 
-# This Source Code may also be made available under the following Secondary
-# Licenses when the conditions for such availability set forth in the Eclipse
-# Public License, v. 2.0 are satisfied: GNU General Public License as published by
-# the Free Software Foundation, either version 2 of the License, or (at your
-# option) any later version, with the GNU Classpath Exception which is available
-# at https://www.gnu.org/software/classpath/license.html.
 
 * Acknowledgments
 This assembler is based on

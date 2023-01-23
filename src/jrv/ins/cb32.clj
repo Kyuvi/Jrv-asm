@@ -16,7 +16,7 @@
 
 ;addi x0 x0 0(?)
 (def-ci nop
- "Takes one cycle and advances program-counter by 2"
+ "Takes one cycle and advances the program-counter by 2."
   []
   (build-rv-ins [16] 1 ))
 

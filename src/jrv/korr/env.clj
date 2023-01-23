@@ -77,7 +77,7 @@
    :flag, :nibble, :byte, :kait, :vait, :zait, :yait"
   {:flag 0.125 :nibble 0.5 ;; for reference only
    :byte 1 :kait 2 :vait 4 :zait 8 :yait 16
-   :b 1 :p 2 :v 4 :z 8 :k 16
+   :b 1 :k 2 :v 4 :z 8 :y 16
    ;; 'flag 0.125 'nibble 0.5 ;; for reference only
    ;; 'byte 1 'kait 2 'vait 4 'zait 8 'yait 16
    })
@@ -286,9 +286,10 @@
         ;;;; Bits, bytes, kaits, vaits and yaits  ;;;;
 ;;
 ;; The instruction are loaded into the code-vector in a series of bytes (8-bits)
-;; Risc-v uses EA-tip (Egyptian/Arabic tip-to-memory) instructions,
-;; also known as little endian, this means the 32 or 16 bit instructions
-;; are inverted bytewise (in 8-bit chunks) before being stored into memory
+;; Risc-v uses EA-tip (Egyptian/Arabic tip-to-memory) addressing,
+;; also known as little endian, this means the 32 or 16 bit instructions/data
+;; are inverted/reversed bytewise (in 8-bit chunks) before being stored into
+;; memory
 
 
 

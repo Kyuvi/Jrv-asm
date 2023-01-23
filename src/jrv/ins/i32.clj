@@ -25,7 +25,7 @@
 (def-vi lui
  "Load Upper Immediate: Load most significant bits of register `rd` with
   immediate `imm32`which should be a multiple of 4096 or 0x1000,
-  filling the lower 12 bits with zeros"
+  filling the lower 12 bits with zeros."
   [rd imm32]
   (upperimm imm32 rd 0x37))
 
@@ -310,7 +310,7 @@
 
 
 (def-vi fence
-  "(fence succ pred)"
+  "(fence succ pred)."
   [succ pred]
   (if (cj-and (signed-int? pred 4) (signed-int? succ 4))
       (build-rv-ins [4 4 4 5 3 5 7] 0 pred succ 0 0 0 0xF))
@@ -319,11 +319,11 @@
 ;; (def-vi fence.i [)]
 
 (def-vi ecall
-  "Environment Call"
+  "Environment Call."
   []
   (build-rv-ins [16 16] 0 0x73))
 
 (def-vi ebreak
-  "Environment Break"
+  "Environment Break."
   []
   (build-rv-ins [16 16] 0x10 0x73)) ;c
