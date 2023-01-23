@@ -58,38 +58,38 @@
         ;;;; Derived register instructions ;;;;
 
 (defn csrr
-  "Reads contents of csr (zero extended) to rd"
+  "Reads contents of csr (zero extended) to rd."
   [rd csr]
   (csrrs rd csr x0))
 
 (defn csrw
-  "Write contents of rs to csr"
+  "Write contents of rs to csr."
   [csr rs]
   (csrrw x0 csr rs))
 
 (defn csrs
-  "Sets the bits in the csr that are set in rs"
+  "Sets the bits in the csr that are set in rs."
   [csr rs]
   (csrrs x0 csr rs))
 
 (defn csrc
-  "Clears the bits in the csr that are set in rs"
+  "Clears the bits in the csr that are set in rs."
   [csr rs]
   (csrrc x0 csr rs))
 
         ;;;;  Derived immediate instructions  ;;;;
 
 (defn csrwi
-  "Write zero extended immediate 'uimm5' to csr"
+  "Write zero extended immediate 'uimm5' to csr."
   [csr uimm5]
   (csrrwi x0 csr uimm5))
 
 (defn csrsi
-  "Sets the bits in the csr that are set in the immediate 'uimm5'"
+  "Sets the bits in the csr that are set in the immediate 'uimm5'."
   [csr uimm5]
   (csrrsi x0 csr uimm5))
 
 (defn csrci
-  "Clears the bits in the csr that are set in the immediate 'uimm5'"
+  "Clears the bits in the csr that are set in the immediate 'uimm5'."
   [csr uimm5]
   (csrrci x0 csr uimm5))
