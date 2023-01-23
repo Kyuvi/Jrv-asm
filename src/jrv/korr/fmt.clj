@@ -8,8 +8,6 @@
              [env :refer :all]
              [reg :refer :all]
             ])
-  ;; (:refer jrv.korr.env)
-  ;; (:refer jrv.korr.reg)
   )
 
 
@@ -30,7 +28,6 @@
           (assert (zero? (bit-shift-right value width))
                   (format
                    "Build-rv-ins: value: %X does not fit into width: %X."
-                   ;; "Build expressions value: %X and width: %X at %X do not fit."
                    value width) ; (pc))
                   )
           (recur (bit-or (bit-shift-left ins-vait width) value)
@@ -283,49 +280,10 @@
      )))
 
 
-;; (defn get-string-args (decl)
-;;   (let [docstr (if (= (type (first decl) str)) (first decl))
-;;         argvec (if docstr (second decl) (first decl))]
-;;     (list docstr argvec)
-
-
-;; (defmacro def-ci
-;;   [nam & fdecl]
-;;   (let [proto-name  (symbol-append '% nam )
-;;         docstr (if (= (type (first fdecl)) String) (first fdecl))
-;;         argvec (if docstr (second fdecl) (first fdecl))
-;;         proto-def `(defn ~proto-name ~@fdecl)
-;;         emit-def  (if docstr
-;;                    `(defn ~nam ~docstr ~argvec
-;;                       (emit-kait! (~proto-name ~@argvec)))
-;;                    `(defn ~nam ~argvec
-;;                       (emit-kait! (~proto-name ~@argvec))))]
-;;     ;; `(defn (symbol-append '% ~nam ) & ~@fdecl)
-;;     ;; (if docstr
-;;       ;; `(defn ~nam ~docstr ~argvec
-;;       ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
-;;       ;; `(defn ~nam ~argvec
-;;       ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
-;;     `(do
-;;       ~proto-def
-;;       ~emit-def
-;;       )))
-
-;; (defmacro def-ci
-;;   [nam & fdecl]
-;;   (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
-;;         argvec (if docstr (second fdecl) (first fdecl))
-;;         ;; proto-def `(defn ~proto-name ~@fdecl)
-;;         emit-def  (if docstr
-;;                    `(defn ~nam ~docstr ~argvec
-;;                       (emit-kait! ~@fdecl))
-;;                    `(defn ~nam ~argvec
-;;                       (emit-kait! ~@fdecl)))]
-;;     `(do
-;;       ~emit-def
-;;       )))
 
 (defmacro def-ci
+  "Define compressed insruction:
+   Macro to simplify definition of compressed (kait sized) RISC-V instructions"
   [nam & fdecl]
   (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
         sdecl (if docstr (rest fdecl) fdecl)
@@ -338,26 +296,10 @@
                       (emit-kait! ~@tdecl)))
       ))
 
-;; (def-ci nop  "test" [ rd ] (build-rv-ins [16] 1))
-
-
-;; (defmacro def-vi
-;;   [nam & fdecl]
-;;   (let [proto-name  (symbol-append '% nam )
-;;         docstr (if (= (type (first fdecl)) String) (first fdecl))
-;;         argvec (if docstr (second fdecl) (first fdecl))
-;;         proto-def `(defn ~proto-name ~@fdecl)
-;;         emit-def  (if docstr
-;;                    `(defn ~nam ~docstr ~argvec
-;;                       (emit-vait! (~proto-name ~@argvec)))
-;;                    `(defn ~nam ~argvec
-;;                       (emit-vait! (~proto-name  ~@argvec))))]
-;;     `(do
-;;       ~proto-def
-;;       ~emit-def
-;;       )))
 
 (defmacro def-vi
+  "Define vait insruction:
+   Macro to simplify definition of normal (vait sized) RISC-V instructions"
   [nam & fdecl]
   (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
         sdecl (if docstr (rest fdecl) fdecl)
