@@ -36,11 +36,14 @@ as are all the other loads and stores (sb,lb, sk/lk, sz/lz).
 
 I personally find it easier to think like this about (modern) assembly code.
 
-Also register "zero" (x0) is renamed to "zr" to avoid confusion with clojures =zero?=
+Register "zero" (x0) is renamed to "zr" to avoid confusion with clojures =zero?=
 function and its test is =zr?= or =z-reg?=.
 
+Also all instructions are clojure functions and are surrounded by parenthesis :)
+
+
 ** Clojure Related
-"and", "or", "rem", "not", "dec" and "inc" are prefixed with "cj-" within the instruction modules so the original words can comply with the RISC-V standard, and I feel this convention should be followed when using this library.
+"and", "or", "rem", "not", "dec" and "inc" are prefixed with "cj-" within the instruction modules so the original words can comply with the RISC-V standard, I feel this convention should be followed when using this library.
 
 
 * Usage
