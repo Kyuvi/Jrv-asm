@@ -289,44 +289,83 @@
 ;;     (list docstr argvec)
 
 
+;; (defmacro def-ci
+;;   [nam & fdecl]
+;;   (let [proto-name  (symbol-append '% nam )
+;;         docstr (if (= (type (first fdecl)) String) (first fdecl))
+;;         argvec (if docstr (second fdecl) (first fdecl))
+;;         proto-def `(defn ~proto-name ~@fdecl)
+;;         emit-def  (if docstr
+;;                    `(defn ~nam ~docstr ~argvec
+;;                       (emit-kait! (~proto-name ~@argvec)))
+;;                    `(defn ~nam ~argvec
+;;                       (emit-kait! (~proto-name ~@argvec))))]
+;;     ;; `(defn (symbol-append '% ~nam ) & ~@fdecl)
+;;     ;; (if docstr
+;;       ;; `(defn ~nam ~docstr ~argvec
+;;       ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
+;;       ;; `(defn ~nam ~argvec
+;;       ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
+;;     `(do
+;;       ~proto-def
+;;       ~emit-def
+;;       )))
+
+;; (defmacro def-ci
+;;   [nam & fdecl]
+;;   (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
+;;         argvec (if docstr (second fdecl) (first fdecl))
+;;         ;; proto-def `(defn ~proto-name ~@fdecl)
+;;         emit-def  (if docstr
+;;                    `(defn ~nam ~docstr ~argvec
+;;                       (emit-kait! ~@fdecl))
+;;                    `(defn ~nam ~argvec
+;;                       (emit-kait! ~@fdecl)))]
+;;     `(do
+;;       ~emit-def
+;;       )))
+
 (defmacro def-ci
   [nam & fdecl]
-  (let [proto-name  (symbol-append '% nam )
-        docstr (if (= (type (first fdecl)) String) (first fdecl))
-        argvec (if docstr (second fdecl) (first fdecl))
-        proto-def `(defn ~proto-name ~@fdecl)
-        emit-def  (if docstr
+  (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
+        sdecl (if docstr (rest fdecl) fdecl)
+        argvec (first sdecl)
+        tdecl (rest sdecl)]
+      (if docstr
                    `(defn ~nam ~docstr ~argvec
-                      (emit-kait! (~proto-name ~@argvec)))
+                      (emit-kait! ~@tdecl))
                    `(defn ~nam ~argvec
-                      (emit-kait! (~proto-name ~@argvec))))]
-    ;; `(defn (symbol-append '% ~nam ) & ~@fdecl)
-    ;; (if docstr
-      ;; `(defn ~nam ~docstr ~argvec
-      ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
-      ;; `(defn ~nam ~argvec
-      ;;    (emit-kait! ((symbol-append '% ~nam) ~@argvec)))
-    `(do
-      ~proto-def
-      ~emit-def
-      )))
-
+                      (emit-kait! ~@tdecl)))
+      ))
 
 ;; (def-ci nop  "test" [ rd ] (build-rv-ins [16] 1))
 
 
+;; (defmacro def-vi
+;;   [nam & fdecl]
+;;   (let [proto-name  (symbol-append '% nam )
+;;         docstr (if (= (type (first fdecl)) String) (first fdecl))
+;;         argvec (if docstr (second fdecl) (first fdecl))
+;;         proto-def `(defn ~proto-name ~@fdecl)
+;;         emit-def  (if docstr
+;;                    `(defn ~nam ~docstr ~argvec
+;;                       (emit-vait! (~proto-name ~@argvec)))
+;;                    `(defn ~nam ~argvec
+;;                       (emit-vait! (~proto-name  ~@argvec))))]
+;;     `(do
+;;       ~proto-def
+;;       ~emit-def
+;;       )))
+
 (defmacro def-vi
   [nam & fdecl]
-  (let [proto-name  (symbol-append '% nam )
-        docstr (if (= (type (first fdecl)) String) (first fdecl))
-        argvec (if docstr (second fdecl) (first fdecl))
-        proto-def `(defn ~proto-name ~@fdecl)
-        emit-def  (if docstr
+  (let [docstr (if (= (type (first fdecl)) String) (first fdecl))
+        sdecl (if docstr (rest fdecl) fdecl)
+        argvec (first sdecl)
+        tdecl (rest sdecl)]
+      (if docstr
                    `(defn ~nam ~docstr ~argvec
-                      (emit-vait! (~proto-name ~@argvec)))
+                      (emit-vait! ~@tdecl))
                    `(defn ~nam ~argvec
-                      (emit-vait! (~proto-name  ~@argvec))))]
-    `(do
-      ~proto-def
-      ~emit-def
-      )))
+                      (emit-vait! ~@tdecl)))
+      ))
