@@ -18,6 +18,8 @@ These are actually the basic modules/packages to be used to build up an assemble
 
 * Syntax and Notation
 ** Assembly Related
+All instructions are clojure functions and therefore need to be surrounded by parenthesis
+
 It includes some changes to the standard assembly notation and syntax namely....
 - nibble - 4-bit (nibble)
 - byte - 8-bit   (byte)
@@ -36,10 +38,9 @@ as are all the other loads and stores (sb,lb, sk/lk, sz/lz).
 
 I personally find it easier to think like this about (modern) assembly code.
 
-Register "zero" (x0) is renamed to "zr" to avoid confusion with clojures =zero?=
+Also Register "zero" (x0) is renamed to "zr" to avoid confusion with clojures =zero?=
 function and its test is =zr?= or =z-reg?=.
 
-Also all instructions are clojure functions and are surrounded by parenthesis :)
 
 
 ** Clojure Related
